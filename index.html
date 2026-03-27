@@ -106,12 +106,12 @@ body {
     <div class="menu-item"> Reports</div>
     <div class="menu-item" onclick="toggleSettings()"> Settings</div>
     <div id="settings-submenu" class="submenu">
-        <div class="submenu-item">Company setup</div>
+        <div class="submenu-item" onclick="loadCompanySetup()">Company setup</div>
         <div class="submenu-item">Staff Setup</div>
     </div>
 </div>
 
-<div class="main">
+<div class="main" id="main-content">
     <h1>Dashboard</h1>
     <p>Select a menu item on the left.</p>
 </div>
@@ -161,6 +161,62 @@ function toggleSettings() {
         menu.style.display = "block";
     }
 }
+
+<script>
+function loadCompanySetup() {
+    document.getElementById("main-content").innerHTML = `
+        <h2>Company Setup</h2>
+
+        <table class="excel-table">
+            <thead>
+                <tr>
+                    <th>Business Name</th>
+                    <th>Company registration number</th>
+                    <th>Registration Date</th>
+                    <th>AR Status</th>
+                    <th>EMP 201</th>
+                    <th>EMP 501</th>
+                    <th>Payslips</th>
+                    <th>IRPs</th>
+                    <th>VAT201</th>
+                    <th>IRP6</th>
+                    <th>AFS</th>
+                    <th>Tax RT</th>
+                </tr>
+            </thead>
+            <tbody id="company-table-body">
+                <tr>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <button onclick="addRow()">Add Company</button>
+    `;
+}
+
+function addRow() {
+    const table = document.getElementById("company-table-body");
+    const row = table.insertRow();
+
+    for (let i = 0; i < 12; i++) {
+        const cell = row.insertCell();
+        cell.contentEditable = "true";
+    }
+}
+</script>
     
 </script>
 
