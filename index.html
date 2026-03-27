@@ -6,36 +6,6 @@
 <title>Firm Dashboard</title>
 
 <style>
-    .submenu {
-    display: none;
-    margin-left: 10px;
-}
-
-.submenu-item {
-    padding: 10px;
-    font-size: 14px;
-    background: #0f172a;
-    margin-bottom: 3px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.submenu-item:hover {
-    background: #1e293b;
-}
-    <style>
-    <script>
-function toggleSars() {
-    var menu = document.getElementById("sars-submenu");
-
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
-    }
-}
-</script>
-    
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -68,6 +38,25 @@ body {
     background: #334155;
 }
 
+/* Submenu */
+.submenu {
+    display: none;
+    margin-left: 10px;
+}
+
+.submenu-item {
+    padding: 10px;
+    font-size: 14px;
+    background: #0f172a;
+    margin-bottom: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submenu-item:hover {
+    background: #1e293b;
+}
+
 /* Main content */
 .main {
     flex: 1;
@@ -85,12 +74,13 @@ body {
 
     <div class="menu-item"> Due this week</div>
     <div class="menu-item"> Due this month</div>
-    <div class="menu-item" onclick="toggleSars()"> SARS</div>
 
+    <div class="menu-item" onclick="toggleSars()"> SARS</div>
     <div id="sars-submenu" class="submenu">
-        <div class="submenu-item"> Company Taxes</div>
-        <div class="submenu-item"> Personal Taxes</div>
+        <div class="submenu-item">Company Taxes</div>
+        <div class="submenu-item">Personal Taxes</div>
     </div>
+
     <div class="menu-item"> CIPC</div>
     <div class="menu-item"> Secreterial</div>
     <div class="menu-item"> Staff workload</div>
@@ -101,6 +91,18 @@ body {
     <h1>Dashboard</h1>
     <p>Select a menu item on the left.</p>
 </div>
+
+<script>
+function toggleSars() {
+    var menu = document.getElementById("sars-submenu");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+</script>
 
 </body>
 </html>
