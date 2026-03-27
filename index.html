@@ -14,11 +14,12 @@ body {
 
 /* Sidebar */
 .sidebar {
-    width: 250px;
+    width: 260px;
     background: #1e293b;
     color: white;
     height: 100vh;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .company-name {
@@ -62,6 +63,28 @@ body {
     flex: 1;
     padding: 20px;
     background: #f1f5f9;
+    overflow-x: auto;
+}
+
+/* Excel Table */
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.excel-table th, .excel-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.excel-table th {
+    background: #e2e8f0;
+}
+
+.excel-table td {
+    min-width: 140px;
 }
 </style>
 </head>
@@ -85,16 +108,17 @@ body {
         <div class="submenu-item">Annual returns</div>
     </div>
 
-    <div class="menu-item" onclick="toggleSecretarial()"> Secretarial</div>
+    <div class="menu-item" onclick="toggleSecretarial()"> Secreterial</div>
     <div id="secretarial-submenu" class="submenu">
         <div class="submenu-item">Company registration</div>
         <div class="submenu-item">Ultimate Beneficial Ownership (UBO)</div>
         <div class="submenu-item">Compliance checklist</div>
         <div class="submenu-item">Public Officer Update</div>
-        <div class="submenu-item">Company Deregistration</div>
+        <div class="submenu-item">Company Deregistraton</div>
         <div class="submenu-item">Company Reinstatement</div>
         <div class="submenu-item">Director Changes</div>
     </div>
+
     <div class="menu-item" onclick="toggleStaff()"> Staff workload</div>
     <div id="staff-submenu" class="submenu">
         <div class="submenu-item">Staff 1</div>
@@ -103,7 +127,9 @@ body {
         <div class="submenu-item">Staff 4</div>
         <div class="submenu-item">Staff 5</div>
     </div>
+
     <div class="menu-item"> Reports</div>
+
     <div class="menu-item" onclick="toggleSettings()"> Settings</div>
     <div id="settings-submenu" class="submenu">
         <div class="submenu-item" onclick="loadCompanySetup()">Company setup</div>
@@ -117,53 +143,37 @@ body {
 </div>
 
 <script>
-function toggleSars() {
-    var menu = document.getElementById("sars-submenu");
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
-    }
+
+/* Dropdown toggles */
+
+function toggleSars(){
+    toggleMenu("sars-submenu");
 }
 
-function toggleCipc() {
-    var menu = document.getElementById("cipc-submenu");
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
-    }
+function toggleCipc(){
+    toggleMenu("cipc-submenu");
 }
 
-function toggleStaff() {
-    var menu = document.getElementById("staff-submenu");
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
-    }
+function toggleSecretarial(){
+    toggleMenu("secretarial-submenu");
 }
 
-function toggleSecretarial() {
-    var menu = document.getElementById("secretarial-submenu");
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
-    }
+function toggleStaff(){
+    toggleMenu("staff-submenu");
 }
 
-function toggleSettings() {
-    var menu = document.getElementById("settings-submenu");
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
-    }
+function toggleSettings(){
+    toggleMenu("settings-submenu");
 }
 
-<script>
-function loadCompanySetup() {
+function toggleMenu(id){
+    var menu = document.getElementById(id);
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+/* Load Company Setup Table */
+
+function loadCompanySetup(){
     document.getElementById("main-content").innerHTML = `
         <h2>Company Setup</h2>
 
@@ -203,21 +213,20 @@ function loadCompanySetup() {
         </table>
 
         <br>
-        <button onclick="addRow()">Add Company</button>
+        <button onclick="addCompanyRow()">Add Company</button>
     `;
 }
 
-function addRow() {
+function addCompanyRow(){
     const table = document.getElementById("company-table-body");
     const row = table.insertRow();
 
-    for (let i = 0; i < 12; i++) {
+    for(let i=0;i<12;i++){
         const cell = row.insertCell();
         cell.contentEditable = "true";
     }
 }
-</script>
-    
+
 </script>
 
 </body>
