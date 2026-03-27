@@ -102,6 +102,13 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     font-weight: bold;
 }
+
+/*horizontal scroll*/
+
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
     
 </style>
 </head>
@@ -194,7 +201,8 @@ function loadCompanySetup(){
     document.getElementById("main-content").innerHTML = `
         <h2>Company Setup</h2>
 
-        <table class="excel-table">
+        <div class="table-container">
+             <table class="excel-table">
             <thead>
                 <tr>
                     <th>Business Name</th>
@@ -215,7 +223,7 @@ function loadCompanySetup(){
                 ${createRow()}
             </tbody>
         </table>
-
+    </div>
         <br>
         <button onclick="addCompanyRow()">Add Company</button>
         <button onclick="removeCompanyRow()">Remove Company</button>
