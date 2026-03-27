@@ -37,3 +37,28 @@ h1 {
 .month {
     color: #d4a017;
 }
+
+.form-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-card input,
+.form-card select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.form-card button {
+    padding: 10px;
+    background: #2f80ed;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
