@@ -195,20 +195,7 @@ function loadCompanySetup(){
                 </tr>
             </thead>
             <tbody id="company-table-body">
-                <tr>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                </tr>
+                ${createRow()}
             </tbody>
         </table>
 
@@ -220,12 +207,7 @@ function loadCompanySetup(){
 
 function addCompanyRow(){
     const table = document.getElementById("company-table-body");
-    const row = table.insertRow();
-
-    for(let i=0;i<12;i++){
-        const cell = row.insertCell();
-        cell.contentEditable = "true";
-    }
+    table.insertAdjacentHTML("beforeend", createRow());
 }
 
 function removeCompanyRow(){
@@ -239,6 +221,38 @@ function removeCompanyRow(){
     }
 }
 
+function createRow(){
+    return `
+    <tr>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+        ${yesNoDropdown()}
+    </tr>
+    `;
+}
+
+function yesNoDropdown(){
+    return `
+    <td>
+        <select>
+            <option value=""></option>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+    </td>
+    `;
+}
+    
 </script>
 
 </body>
