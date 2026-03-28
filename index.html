@@ -291,13 +291,13 @@ function loadCompanyTaxes(){
         <h2>SARS — Company Taxes</h2>
 
         <div class="widgets">
-            <div class="widget" onclick="loadEMP201()">EMP201</div>
-            <div class="widget">EMP501</div>
-            <div class="widget">IRPs</div>
-            <div class="widget">VAT201</div>
-            <div class="widget">IRP6</div>
-            <div class="widget">ITR14</div>
-            <div class="widget">IRP5/IT3a</div>
+            <div class="widget" onclick="loadComplianceTable('emp201','EMP201')">EMP201</div>
+            <div class="widget" onclick="loadComplianceTable('emp501','EMP501')">EMP501</div>
+            <div class="widget" onclick="loadComplianceTable('irps','IRPs')">IRPs</div>
+            <div class="widget" onclick="loadComplianceTable('vat201','VAT201')">VAT201</div>
+            <div class="widget" onclick="loadComplianceTable('irp6','IRP6')">IRP6</div>
+            <div class="widget" onclick="loadComplianceTable('taxrt','ITR14')">ITR14</div>
+            <div class="widget" onclick="loadComplianceTable('emp501','IRP5/IT3a')">IRP5/IT3a</div>
         </div>
     `;
 }
@@ -340,27 +340,26 @@ function loadEMP201(){
 
     /*pull companies from company setup*/
 
- function populateEMP201(){
+    function populateCompliance(field){
 
-    const empBody = document.getElementById("emp201-body");
+    const body = document.getElementById("compliance-body");
 
     companyDatabase.forEach(company => {
 
-        if(company.emp201 === "Yes"){
+        if(company[field] === "Yes"){
 
-            const newRow = empBody.insertRow();
+            const row = body.insertRow();
 
-            newRow.insertCell().innerText = company.name;
+            row.insertCell().innerText = company.name;
 
-            for(let i = 0; i < 12; i++){
-                const cell = newRow.insertCell();
+            for(let i=0;i<12;i++){
+                const cell = row.insertCell();
                 cell.contentEditable = "true";
             }
 
         }
 
     });
-
 }
 
     /*Save companies when leaving dashboard on the right*/
@@ -405,6 +404,42 @@ function loadEMP201(){
         th.style.resize = "horizontal";
         th.style.overflow = "auto";
     });
+}
+
+function loadComplianceTable(field, title){
+
+    saveCompanySetup();
+
+    document.getElementById("main-content").innerHTML = `
+        <h2>SARS — ${title}</h2>
+
+        <div class="table-container">
+        <table class="excel-table">
+            <thead>
+                <tr>
+                    <th>Business name</th>
+                    <th>March</th>
+                    <th>April</th>
+                    <th>May</th>
+                    <th>June</th>
+                    <th>July</th>
+                    <th>August</th>
+                    <th>September</th>
+                    <th>October</th>
+                    <th>November</th>
+                    <th>December</th>
+                    <th>January</th>
+                    <th>February</th>
+                </tr>
+            </thead>
+            <tbody id="compliance-body"></tbody>
+        </table>
+        </div>
+    `;
+
+    populateCompliance(field);
+
+    setTimeout(enableColumnResize, 100);
 }
     
 </script>
