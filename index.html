@@ -299,6 +299,8 @@ function loadCompanyTaxes(){
 
 function loadEMP201(){
 
+    saveCompanySetup();
+
     document.getElementById("main-content").innerHTML = `
         <h2>SARS — EMP201</h2>
 
@@ -332,42 +334,27 @@ function loadEMP201(){
 
     /*pull companies from company setup*/
 
-    function populateEMP201(){
+ function populateEMP201(){
 
     const empBody = document.getElementById("emp201-body");
 
-    // read company setup table
-    const companyTable = document.querySelector("#company-table-body");
+    companyDatabase.forEach(company => {
 
-    if(!companyTable) {
-        empBody.innerHTML = "<tr><td colspan='13'>No company data found</td></tr>";
-        return;
-    }
-
-    const rows = companyTable.rows;
-
-    for(let i = 0; i < rows.length; i++){
-
-        const cells = rows[i].cells;
-
-        const businessName = cells[0].innerText;
-
-        const emp201Dropdown = cells[4].querySelector("select");
-
-        if(emp201Dropdown && emp201Dropdown.value === "Yes"){
+        if(company.emp201 === "Yes"){
 
             const newRow = empBody.insertRow();
 
-            // business name
-            newRow.insertCell().innerText = businessName;
+            newRow.insertCell().innerText = company.name;
 
-            // months
-            for(let m = 0; m < 12; m++){
+            for(let i = 0; i < 12; i++){
                 const cell = newRow.insertCell();
                 cell.contentEditable = "true";
             }
+
         }
-    }
+
+    });
+
 }
 
     /*Save companies when leaving dashboard on the right*/
