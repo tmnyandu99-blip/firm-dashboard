@@ -259,15 +259,16 @@ function createRow(){
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
 
-        ${yesNoDropdown()}
-        ${yesNoDropdown()}
-        ${yesNoDropdown()}
-        ${yesNoDropdown()}
-        ${yesNoDropdown()}
-        ${vatDropdown()}
-        ${yesNoDropdown()}
-        ${yesNoDropdown()}
-        ${yesNoDropdown()}
+        ${yesNoDropdown()}  <!-- AR -->
+        ${yesNoDropdown()}  <!-- EMP201 -->
+        ${yesNoDropdown()}  <!-- EMP501 -->
+        ${yesNoDropdown()}  <!-- Payslips -->
+        ${yesNoDropdown()}  <!-- ITR12 -->
+        ${yesNoDropdown()}  <!-- IRPs -->
+        ${vatDropdown()}    <!-- VAT201 -->
+        ${yesNoDropdown()}  <!-- IRP6 -->
+        ${yesNoDropdown()}  <!-- AFS -->
+        ${yesNoDropdown()}  <!-- Tax RT -->
     </tr>
     `;
 }
@@ -364,7 +365,7 @@ function loadEMP201(){
 
     /*Save companies when leaving dashboard on the right*/
 
-    function saveCompanySetup(){
+function saveCompanySetup(){
 
     companyDatabase = [];
 
@@ -382,11 +383,12 @@ function loadEMP201(){
             emp201: cells[4].querySelector("select")?.value,
             emp501: cells[5].querySelector("select")?.value,
             payslips: cells[6].querySelector("select")?.value,
-            irps: cells[7].querySelector("select")?.value,
-            vat201: cells[8].querySelector("select")?.value,
-            irp6: cells[9].querySelector("select")?.value,
-            afs: cells[10].querySelector("select")?.value,
-            taxrt: cells[11].querySelector("select")?.value
+            itr12: cells[7].querySelector("select")?.value,
+            irps: cells[8].querySelector("select")?.value,
+            vat201: cells[9].querySelector("select")?.value,
+            irp6: cells[10].querySelector("select")?.value,
+            afs: cells[11].querySelector("select")?.value,
+            taxrt: cells[12].querySelector("select")?.value
         };
 
         if(company.name.trim() !== ""){
