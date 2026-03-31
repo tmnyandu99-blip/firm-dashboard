@@ -114,6 +114,10 @@ body {
     overflow-x: auto;
     width: 100%;
 }
+
+.selected-row {
+    background-color: #dbeafe !important;
+}
     
 </style>
 </head>
@@ -265,8 +269,9 @@ function removeCompanyRow(){
 function createRow(){
     return `
     <tr>
-
-        <td><input type="checkbox" class="row-select"></td>
+        <td>
+            <input type="checkbox" class="row-select" onclick="toggleRowHighlight(this)">
+        </td>
         
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
@@ -556,6 +561,18 @@ function populateVAT201(){
     </td>
     `;
 }
+
+    
+function toggleRowHighlight(checkbox){
+    const row = checkbox.closest("tr");
+
+    if(checkbox.checked){
+        row.classList.add("selected-row");
+    } else {
+        row.classList.remove("selected-row");
+    }
+}
+
     
 </script>
 
