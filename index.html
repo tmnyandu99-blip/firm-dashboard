@@ -176,6 +176,7 @@ body {
 
 <script>
     let companyDatabase = [];
+    let staffCounter = 1;
 
 /* Dropdown toggles */
 
@@ -571,6 +572,112 @@ function toggleRowHighlight(checkbox){
     } else {
         row.classList.remove("selected-row");
     }
+}
+
+/*Staff setup*/
+
+function loadStaffSetup(){
+    document.getElementById("main-content").innerHTML = `
+        <h2>Staff Setup</h2>
+
+        <div class="table-container">
+        <table class="excel-table">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Staff Number</th>
+                    <th>Staff Name</th>
+                    <th>ID Number</th>
+                    <th>Tax Number</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Start Date</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody id="staff-table-body">
+                ${createStaffRow()}
+            </tbody>
+        </table>
+        </div>
+
+        <br>
+        <button onclick="addStaffRow()">Add Staff</button>
+        <button onclick="removeStaffRow()">Remove Staff</button>
+    `;
+}
+
+function generateStaffNumber(){
+    const number = "SJ" + String(staffCounter).padStart(3, "0");
+    staffCounter++;
+    return number;
+}
+
+function createStaffRow(){
+    return `
+    <tr>
+        <td>
+            <input type="checkbox" class="row-select" onclick="toggleRowHighlight(this)">
+        </td>
+
+        <td>${generateStaffNumber()}</td>
+
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+    </tr>
+    `;
+}
+
+function addStaffRow(){
+    const table = document.getElementById("staff-table-body");
+    table.insertAdjacentHTML("beforeend", createStaffRow());
+}
+
+
+function removeStaffRow(){
+    const table = document.getElementById("staff-table-body");
+    const rows = table.querySelectorAll("tr");
+
+    rows.forEach((row, index) => {
+        const checkbox = row.querySelector(".row-select");
+
+        if(checkbox && checkbox.checked){
+            table.deleteRow(index);
+        }
+    });
+}
+
+function saveStaffSetup(){
+
+    staffDatabase = [];
+
+    const rows = document.querySelectorAll("#staff-table-body tr");
+
+    rows.forEach(row => {
+
+        const cells = row.cells;
+
+        const staff = {
+            number: cells[1].innerText,
+            name: cells[2].innerText,
+            id: cells[3].innerText,
+            tax: cells[4].innerText,
+            email: cells[5].innerText,
+            phone: cells[6].innerText,
+            startDate: cells[7].innerText,
+            role: cells[8].innerText
+        };
+
+        if(staff.name.trim() !== ""){
+            staffDatabase.push(staff);
+        }
+
+    });
 }
 
     
